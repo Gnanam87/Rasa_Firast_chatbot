@@ -1,0 +1,88 @@
+Rasa --		open source machine learnig tool for coversational Chatbot
+
+Rasa Core --	Core decides what next in the coversation, 
+		ML based dialogue predicts the best action ,based on the input from NLU
+
+Core -------	a chatbot framework with machine learning-based dialogue management
+
+Rasa NLU --	Understad the user's message based on the training data.
+	Intent Classification:
+		- Iterpreting meanig based on predefied intents(Example: “Please send the confirmation to amy@example.com” is a send_confirmation intent with 93% confidence)
+	Entity Extraction:
+		- Recogizing the structured data.(Example: amy@example.com is an email).
+
+NLU	------	a library for natural language understanding with intent classification and entity extraction
+
+
+Create NLU Examples:
+
+you will start teachig your assitent to uderstand your messages.
+train your model that will take your inputs in a simple text format and extract structured format called intents.
+
+save the Rasa NLU training examples to the file nlu.md
+
+Define the NLU Model cofiguration:
+
+NLU model cofiguration defines ,how the NLU model will be trained ad how the features from the text input will be extracted.
+NLU cofiguration file will be saved as nlu_cofig.yml
+
+we can use predefined pipeline.
+
+Train the NLU Model:
+Run the cell below which will call the rasa.nlu model, pass the previously defined nlu.md and nlu_config.yml files and save the model inside the models/current/nlu directory.
+python -m rasa_nlu.train -c nlu_config.yml --data nlu.md -o models --fixed_model_name nlu --project current --verbose
+
+Test your model:
+
+Write Stories:
+
+Rasa core models learn from real coversational data in the form of traiing "stories".
+
+" A story is a real coversation between a user and a bot where user inputs are expressed as intents and
+the responses of the bot are expressed as action items".
+
+## story1
+* greet
+   - utter_greet
+
+A story starts with ## followed by a name(optional).
+Lines that start with * are messages sent by the user.
+Lines that start with - are actions taken by your bot.
+
+ but in general, an action can do anything, including calling an API and interacting with the outside world.
+
+Defie Domain:
+
+Domain defies universe your bot lives in,
+
+	- what user inputs it should expect to get, (intents)
+	- what actions it should be able to predict, (actions)
+	- how to respond ad what information to store.(templates)
+
+Domain file saved into domain.yml
+
+Intents - things you expect users to say.
+actions - things you bot can do and say.
+templates - template strings for the things your bot ca say.
+
+
+Train your Dialogue Model:
+
+!python -m rasa_core.train -d domain.yml -s stories.md -o models/dialogue
+
+Train a neural network on our example stories.
+The above mentioned commad will call the Rasa core train function, pass domai and stories files to it.
+and stored the trained model into the modeles/stories directory.
+The output of this command will include the training results for each training epoch.
+
+
+Rasa High level Architecture:
+
+Message IN --> interpreter --> Tracker -- Policy-
+				 |		|
+Message Out <-------------------Action<---------|
+
+1. The message received and passed to a interpreter, which converts it into a dictionary including inte
+
+
+
