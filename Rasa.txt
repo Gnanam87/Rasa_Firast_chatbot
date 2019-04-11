@@ -1,13 +1,15 @@
 Rasa --		open source machine learnig tool for coversational Chatbot
 
+Rasa is a "Open source highly scalable ML framework to buld conversational software"
+
 Rasa Core --	Core decides what next in the coversation, 
 		ML based dialogue predicts the best action ,based on the input from NLU
 
-Core -------	a chatbot framework with machine learning-based dialogue management
+Core -------	A chatbot framework with machine learning-based dialogue management
 
 Rasa NLU --	Understad the user's message based on the training data.
 	Intent Classification:
-		- Iterpreting meanig based on predefied intents(Example: “Please send the confirmation to amy@example.com” is a send_confirmation intent with 93% confidence)
+		- Interpreting meanig based on predefied intents(Example: “Please send the confirmation to amy@example.com” is a send_confirmation intent with 93% confidence)
 	Entity Extraction:
 		- Recogizing the structured data.(Example: amy@example.com is an email).
 
@@ -16,7 +18,7 @@ NLU	------	a library for natural language understanding with intent classificati
 
 Create NLU Examples:
 
-you will start teachig your assitent to uderstand your messages.
+you will start teaching your assitent to understand your messages.
 train your model that will take your inputs in a simple text format and extract structured format called intents.
 
 save the Rasa NLU training examples to the file nlu.md
@@ -71,7 +73,7 @@ Train your Dialogue Model:
 !python -m rasa_core.train -d domain.yml -s stories.md -o models/dialogue
 
 Train a neural network on our example stories.
-The above mentioned commad will call the Rasa core train function, pass domai and stories files to it.
+The above mentioned commad will call the Rasa core train function, pass domain and stories files to it.
 and stored the trained model into the modeles/stories directory.
 The output of this command will include the training results for each training epoch.
 
@@ -85,4 +87,16 @@ Message Out <-------------------Action<---------|
 1. The message received and passed to a interpreter, which converts it into a dictionary including inte
 
 
+
+Create a Bot usig RASA
+NLU
+1. create a data folder and data.jso for training model. (minimum two intents/entities need in the json file)
+2. create config json file for pipline configuration. 
+3.a create nlu-model for train the data.json and create the models
+3.b predict the intet ad etity for new text using run_nlu function
+
+Dialogue Managemet
+
+4. Domain
+5. Dialogue Management model.py
 
